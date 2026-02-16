@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjana Kulkarni - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f6f3;
+            --bg-tertiary: #f1f0ed;
+            --text-primary: #37352f;
+            --text-secondary: #787774;
+            --text-tertiary: #9b9a97;
+            --border-color: #e9e9e7;
+            --accent-color: #2383e2;
+            --hover-bg: #f1f1ef;
+            --shadow: rgba(15, 15, 15, 0.05);
+            --shadow-lg: rgba(15, 15, 15, 0.1);
+            --sidebar-bg: #fbfbfa;
+            --sidebar-width: 240px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #191919;
+            --bg-secondary: #202020;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #9b9b9b;
+            --text-tertiary: #6f6f6f;
+            --border-color: #393939;
+            --accent-color: #529cca;
+            --hover-bg: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-lg: rgba(0, 0, 0, 0.5);
+            --sidebar-bg: #1f1f1f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .sidebar-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .sidebar-username {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .sidebar-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .sidebar-btn {
+            background: transparent;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .search-box {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        .nav-section {
+            padding: 0 8px;
+            margin-bottom: 16px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+            padding: 8px 8px 4px 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: var(--hover-bg);
+        }
+
+        .nav-item.active {
+            background: var(--hover-bg);
+            color: var(--accent-color);
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+        }
+
+        .nav-item.active svg {
+            opacity: 1;
+        }
+
+        .sidebar-footer {
+            padding: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 80px;
+        }
+
+        /* AI Recommendations Panel */
+        .ai-recommendations {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 360px;
+            max-height: 500px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow-lg);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .ai-recommendations.minimized {
+            max-height: 60px;
+        }
+
+        .ai-rec-header {
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .ai-rec-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .ai-rec-title svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .ai-rec-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-rec-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .ai-rec-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .ai-rec-content {
+            padding: 16px;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .ai-insight {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .ai-insight svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ai-recommendation-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ai-recommendation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-lg);
+        }
+
+        .ai-rec-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .ai-rec-card-reason {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .ai-rec-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .ai-rec-tag {
+            background: var(--bg-tertiary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--text-primary);
+        }
+
+        .ai-learning-status {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Profile Section */
+        .section {
+            margin-bottom: 80px;
+            scroll-margin-top: 20px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .profile-image-container {
+            flex-shrink: 0;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        .profile-content h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .profile-content .titles {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover {
+            background: var(--hover-bg);
+            color: var(--accent-color);
+        }
+
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 12px var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .github-graph {
+            margin-top: 16px;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .github-graph img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .skill-category:hover {
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .skill-category h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 4px 12px var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .project-card.ai-highlighted {
+            border: 2px solid var(--accent-color);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ai-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 16/9;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px var(--shadow-lg);
+        }
+
+        /* Blogs */
+        .blog-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .blog-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 4px 12px var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .blog-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .blog-excerpt {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .blog-meta {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                z-index: 150;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 80px 20px 40px 20px;
+            }
+
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-content h1 {
+                font-size: 32px;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-recommendations {
+                width: calc(100% - 32px);
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-user">
+                <div class="sidebar-avatar">SK</div>
+                <span class="sidebar-username">Sanjana's Portfolio</span>
+            </div>
+            <div class="sidebar-controls">
+                <button class="sidebar-btn" onclick="toggleTheme()">
+                    <i data-lucide="moon" id="theme-icon-sidebar"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <div class="search-input-wrapper">
+                <i data-lucide="search" style="width: 16px; height: 16px; color: var(--text-tertiary);"></i>
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+        </div>
+
+        <div class="sidebar-nav">
+            <div class="nav-section">
+                <a href="#home" class="nav-item active" onclick="setActive(this)">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#stats" class="nav-item" onclick="setActive(this)">
+                    <i data-lucide="activity"></i>
+                    <span>Stats</span>
+                </a>
+                <a href="#skills" class="nav-item" onclick="setActive(this)">
+                    <i data-lucide="code-2"></i>
+                    <span>Skills</span>
+                </a>
+                <a href="#projects" class="nav-item" onclick="setActive(this)">
+                    <i data-lucide="folder"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="#gallery" class="nav-item" onclick="setActive(this)">
+                    <i data-lucide="image"></i>
+                    <span>Gallery</span>
+                </a>
+                <a href="#blogs" class="nav-item" onclick="setActive(this)">
+                    <i data-lucide="file-text"></i>
+                    <span>Blogs</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Connect</div>
+                <a href="mailto:sanjukul7653@gmail.com" class="nav-item">
+                    <i data-lucide="mail"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://github.com/Sanjana765Kulkarni" target="_blank" class="nav-item">
+                    <i data-lucide="github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://leetcode.com/KulkSanjana" target="_blank" class="nav-item">
+                    <i data-lucide="code"></i>
+                    <span>LeetCode</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="nav-item" onclick="showSettings()">
+                <i data-lucide="settings"></i>
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Profile Section -->
+            <div class="section" id="home">
+                <div class="profile">
+                    <div class="profile-image-container">
+                        <div class="profile-image" id="profileImage">
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;"
+                                onchange="handleImageUpload(event)">
+                            <label for="imageUpload" style="cursor: pointer; text-align: center; padding: 20px;">
+                                Click to upload photo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <h1>Sanjana Kulkarni</h1>
+                        <div class="titles">
+                            Software Developer • AI & ML Engineer • AI Agentic Engineer • Data Scientist
+                        </div>
+                        <div class="contact-info">
+                            <a href="mailto:sanjukul7653@gmail.com" class="contact-item">
+                                <i data-lucide="mail"></i>
+                                sanjukul7653@gmail.com
+                            </a>
+                            <a href="tel:7624863406" class="contact-item">
+                                <i data-lucide="phone"></i>
+                                7624863406
+                            </a>
+                            <a href="https://github.com/Sanjana765Kulkarni" target="_blank" class="contact-item">
+                                <i data-lucide="github"></i>
+                                GitHub
+                            </a>
+                            <a href="https://leetcode.com/KulkSanjana" target="_blank" class="contact-item">
+                                <i data-lucide="code"></i>
+                                LeetCode
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="section" id="stats">
+                <h2 class="section-title">
+                    <i data-lucide="bar-chart-3"></i>
+                    Statistics
+                </h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>LeetCode Stats</h3>
+                        <div class="stat-value" id="leetcodeCount">
+                            <span class="loading"></span>
+                        </div>
+                        <div class="stat-label">Problems Solved</div>
+                    </div>
+                    <div class="stat-card" style="grid-column: span 2;">
+                        <h3>GitHub Activity</h3>
+                        <div class="github-graph" id="githubGraph">
+                            <span class="loading"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="section" id="skills">
+                <h2 class="section-title">
+                    <i data-lucide="code-2"></i>
+                    Skills & Expertise
+                </h2>
+                <div class="skills-grid">
+                    <div class="skill-category" data-category="programming">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag" data-skill="python">Python</span>
+                            <span class="skill-tag" data-skill="cpp">C++</span>
+                            <span class="skill-tag" data-skill="java">Java</span>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-category="ai-ml">
+                        <h4>AI, ML & NLP</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag" data-skill="slm">SLM</span>
+                            <span class="skill-tag" data-skill="deep-learning">Deep Learning</span>
+                            <span class="skill-tag" data-skill="rag">RAG</span>
+                            <span class="skill-tag" data-skill="opencv">OpenCV</span>
+                            <span class="skill-tag" data-skill="mediapipe">Mediapipe</span>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-category="cloud">
+                        <h4>Cloud & Databases</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag" data-skill="aws">AWS</span>
+                            <span class="skill-tag" data-skill="cloud">Cloud Architecture</span>
+                            <span class="skill-tag" data-skill="firebase">Firebase</span>
+                            <span class="skill-tag" data-skill="sql">SQL</span>
+                            <span class="skill-tag" data-skill="databases">Databases</span>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-category="tools">
+                        <h4>Tools</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag" data-skill="git">Git</span>
+                            <span class="skill-tag" data-skill="vscode">VS Code</span>
+                            <span class="skill-tag" data-skill="cli">CLI</span>
+                            <span class="skill-tag" data-skill="excel">Microsoft Excel</span>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-category="soft">
+                        <h4>Soft Skills</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag" data-skill="problem-solving">Problem-Solving</span>
+                            <span class="skill-tag" data-skill="collaboration">Team Collaboration</span>
+                            <span class="skill-tag" data-skill="research">Research</span>
+                            <span class="skill-tag" data-skill="pm">Project Management</span>
+                            <span class="skill-tag" data-skill="speaking">Public Speaking</span>
+                            <span class="skill-tag" data-skill="prompting">Prompting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="section" id="projects">
+                <h2 class="section-title">
+                    <i data-lucide="folder"></i>
+                    Projects
+                </h2>
+                <div class="projects-grid" id="projectsContainer">
+                    <div class="loading"></div>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="section" id="gallery">
+                <h2 class="section-title">
+                    <i data-lucide="image"></i>
+                    Gallery
+                </h2>
+                <div class="gallery-grid" id="galleryContainer">
+                    <div class="gallery-item">Add your images here</div>
+                    <div class="gallery-item">Add your images here</div>
+                    <div class="gallery-item">Add your images here</div>
+                    <div class="gallery-item">Add your images here</div>
+                </div>
+            </div>
+
+            <!-- Blogs Section -->
+            <div class="section" id="blogs">
+                <h2 class="section-title">
+                    <i data-lucide="file-text"></i>
+                    Blog Posts
+                </h2>
+                <div class="blog-list" id="blogsContainer">
+                    <div class="blog-card">
+                        <div class="blog-title">Your Blog Title Here</div>
+                        <div class="blog-excerpt">Add your blog posts here. You can link them to Medium, Dev.to, or your
+                            own blog platform.</div>
+                        <div class="blog-meta">Click to add your blogs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Recommendations Panel -->
+    <div class="ai-recommendations" id="aiRecommendations">
+        <div class="ai-rec-header" onclick="toggleAIPanel()">
+            <div class="ai-rec-title">
+                <i data-lucide="sparkles"></i>
+                <span>AI Recommendations</span>
+            </div>
+            <div class="ai-rec-controls">
+                <button class="ai-rec-btn" onclick="event.stopPropagation(); toggleAIPanel()">
+                    <i data-lucide="minus" id="aiToggleIcon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="ai-rec-content" id="aiRecContent">
+            <div class="ai-learning-status">
+                <span class="pulse-dot"></span>
+                <span>AI is analyzing your interests...</span>
+            </div>
+            <div id="aiInsightsContainer"></div>
+            <div id="aiRecommendationsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // AI Recommendation System
+        class AIRecommendationEngine {
+            constructor() {
+                this.userInterests = {
+                    skills: [],
+                    sections: {},
+                    projectInteractions: [],
+                    timeSpent: {}
+                };
+                this.projectsData = [];
+                this.startTime = Date.now();
+                this.sectionTimers = {};
+                this.init();
+            }
+
+            init() {
+                this.trackScrollBehavior();
+                this.trackSkillClicks();
+                this.trackProjectInteractions();
+                this.trackTimeOnSections();
+
+                // Generate recommendations after initial data is loaded
+                setTimeout(() => this.generateRecommendations(), 3000);
+
+                // Update recommendations periodically
+                setInterval(() => this.generateRecommendations(), 15000);
+            }
+
+            trackScrollBehavior() {
+                const sections = document.querySelectorAll('.section');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const sectionId = entry.target.id;
+                            if (!this.userInterests.sections[sectionId]) {
+                                this.userInterests.sections[sectionId] = 0;
+                            }
+                            this.userInterests.sections[sectionId]++;
+
+                            // Start timer for section
+                            this.sectionTimers[sectionId] = Date.now();
+                        } else {
+                            // Calculate time spent
+                            const sectionId = entry.target.id;
+                            if (this.sectionTimers[sectionId]) {
+                                const timeSpent = Date.now() - this.sectionTimers[sectionId];
+                                if (!this.userInterests.timeSpent[sectionId]) {
+                                    this.userInterests.timeSpent[sectionId] = 0;
+                                }
+                                this.userInterests.timeSpent[sectionId] += timeSpent;
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                sections.forEach(section => observer.observe(section));
+            }
+
+            trackSkillClicks() {
+                document.querySelectorAll('.skill-tag').forEach(skill => {
+                    skill.addEventListener('click', () => {
+                        const skillName = skill.getAttribute('data-skill');
+                        if (!this.userInterests.skills.includes(skillName)) {
+                            this.userInterests.skills.push(skillName);
+                        }
+                        this.generateRecommendations();
+                    });
+                });
+            }
+
+            trackProjectInteractions() {
+                document.addEventListener('click', (e) => {
+                    const projectCard = e.target.closest('.project-card');
+                    if (projectCard) {
+                        const projectName = projectCard.querySelector('.project-title')?.textContent;
+                        if (projectName && !this.userInterests.projectInteractions.includes(projectName)) {
+                            this.userInterests.projectInteractions.push(projectName);
+                            this.generateRecommendations();
+                        }
+                    }
+                });
+            }
+
+            trackTimeOnSections() {
+                // Track overall engagement
+                setInterval(() => {
+                    const totalTime = Date.now() - this.startTime;
+                    if (totalTime > 30000) { // After 30 seconds
+                        this.generateRecommendations();
+                    }
+                }, 30000);
+            }
+
+            analyzeInterests() {
+                const interests = [];
+
+                // Analyze section visits
+                const mostVisitedSections = Object.entries(this.userInterests.sections)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3);
+
+                // Analyze time spent
+                const mostTimeSpent = Object.entries(this.userInterests.timeSpent)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 2);
+
+                if (mostVisitedSections.length > 0) {
+                    const topSection = mostVisitedSections[0][0];
+                    interests.push({ type: 'section', value: topSection, weight: 3 });
+                }
+
+                if (mostTimeSpent.length > 0) {
+                    const topTimeSection = mostTimeSpent[0][0];
+                    interests.push({ type: 'timeSpent', value: topTimeSection, weight: 2 });
+                }
+
+                // Add clicked skills
+                this.userInterests.skills.forEach(skill => {
+                    interests.push({ type: 'skill', value: skill, weight: 1 });
+                });
+
+                return interests;
+            }
+
+            matchProjectsToInterests(interests) {
+                if (this.projectsData.length === 0) return [];
+
+                const recommendations = this.projectsData.map(project => {
+                    let score = 0;
+                    let reasons = [];
+
+                    interests.forEach(interest => {
+                        if (interest.type === 'section' && interest.value === 'skills') {
+                            score += interest.weight;
+                            reasons.push('You explored the skills section');
+                        }
+
+                        if (interest.type === 'skill') {
+                            const skillMatch = project.language?.toLowerCase().includes(interest.value) ||
+                                project.name?.toLowerCase().includes(interest.value) ||
+                                project.description?.toLowerCase().includes(interest.value);
+                            if (skillMatch) {
+                                score += interest.weight * 2;
+                                reasons.push(`Uses ${interest.value}`);
+                            }
+                        }
+
+                        if (interest.type === 'timeSpent' && interest.value === 'projects') {
+                            score += interest.weight;
+                            reasons.push('You spent time on projects');
+                        }
+                    });
+
+                    // Boost score for active repos
+                    if (project.stargazers_count > 0) score += 1;
+                    if (project.forks_count > 0) score += 1;
+
+                    return { ...project, score, reasons: [...new Set(reasons)] };
+                });
+
+                return recommendations
+                    .filter(r => r.score > 0)
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 3);
+            }
+
+            generateInsights() {
+                const insights = [];
+                const totalSections = Object.keys(this.userInterests.sections).length;
+
+                if (totalSections >= 3) {
+                    insights.push({
+                        icon: 'eye',
+                        text: `You've explored ${totalSections} sections - here are projects that match your interests`
+                    });
+                }
+
+                if (this.userInterests.skills.length > 0) {
+                    insights.push({
+                        icon: 'zap',
+                        text: `Based on your interest in ${this.userInterests.skills.slice(0, 2).join(', ')}, these might interest you`
+                    });
+                }
+
+                const mostTimeSection = Object.entries(this.userInterests.timeSpent)
+                    .sort((a, b) => b[1] - a[1])[0];
+
+                if (mostTimeSection && mostTimeSection[1] > 10000) {
+                    const sectionName = mostTimeSection[0].charAt(0).toUpperCase() + mostTimeSection[0].slice(1);
+                    insights.push({
+                        icon: 'clock',
+                        text: `You spent the most time on ${sectionName} - showing related content`
+                    });
+                }
+
+                return insights.slice(0, 2);
+            }
+
+            generateRecommendations() {
+                const interests = this.analyzeInterests();
+                const recommendations = this.matchProjectsToInterests(interests);
+                const insights = this.generateInsights();
+
+                this.displayInsights(insights);
+                this.displayRecommendations(recommendations);
+                this.highlightProjects(recommendations);
+            }
+
+            displayInsights(insights) {
+                const container = document.getElementById('aiInsightsContainer');
+                if (insights.length === 0) {
+                    container.innerHTML = '';
+                    return;
+                }
+
+                container.innerHTML = insights.map(insight => `
+                    <div class="ai-insight">
+                        <i data-lucide="${insight.icon}"></i>
+                        <span>${insight.text}</span>
+                    </div>
+                `).join('');
+
+                lucide.createIcons();
+            }
+
+            displayRecommendations(recommendations) {
+                const container = document.getElementById('aiRecommendationsContainer');
+
+                if (recommendations.length === 0) {
+                    return;
+                }
+
+                container.innerHTML = recommendations.map(rec => `
+                    <div class="ai-recommendation-card" onclick="window.open('${rec.html_url}', '_blank')">
+                        <div class="ai-rec-card-title">${rec.name}</div>
+                        <div class="ai-rec-card-reason">${rec.reasons[0] || 'Recommended for you'}</div>
+                        <div class="ai-rec-card-tags">
+                            ${rec.language ? `<span class="ai-rec-tag">${rec.language}</span>` : ''}
+                            <span class="ai-rec-tag">⭐ ${rec.stargazers_count}</span>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Remove learning status
+                document.querySelector('.ai-learning-status').style.display = 'none';
+            }
+
+            highlightProjects(recommendations) {
+                // Remove previous highlights
+                document.querySelectorAll('.project-card').forEach(card => {
+                    card.classList.remove('ai-highlighted');
+                    const badge = card.querySelector('.ai-badge');
+                    if (badge) badge.remove();
+                });
+
+                // Add highlights to recommended projects
+                recommendations.forEach(rec => {
+                    const cards = document.querySelectorAll('.project-card');
+                    cards.forEach(card => {
+                        const title = card.querySelector('.project-title')?.textContent;
+                        if (title === rec.name) {
+                            card.classList.add('ai-highlighted');
+                            const header = card.querySelector('.project-header');
+                            if (header && !card.querySelector('.ai-badge')) {
+                                const badge = document.createElement('span');
+                                badge.className = 'ai-badge';
+                                badge.innerHTML = '<i data-lucide="sparkles" style="width: 12px; height: 12px;"></i> AI Pick';
+                                header.insertBefore(badge, header.firstChild);
+                                lucide.createIcons();
+                            }
+                        }
+                    });
+                });
+            }
+
+            setProjectsData(data) {
+                this.projectsData = data;
+            }
+        }
+
+        // Initialize AI Engine
+        const aiEngine = new AIRecommendationEngine();
+
+        // Toggle AI Panel
+        function toggleAIPanel() {
+            const panel = document.getElementById('aiRecommendations');
+            const icon = document.getElementById('aiToggleIcon');
+            panel.classList.toggle('minimized');
+
+            if (panel.classList.contains('minimized')) {
+                icon.setAttribute('data-lucide', 'maximize-2');
+            } else {
+                icon.setAttribute('data-lucide', 'minus');
+            }
+            lucide.createIcons();
+        }
+
+        // Sidebar Navigation
+        function setActive(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+
+            localStorage.setItem('theme', newTheme);
+            updateGitHubGraph();
+            lucide.createIcons();
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+
+            fetchLeetCodeStats();
+            fetchGitHubProjects();
+            updateGitHubGraph();
+            setupScrollSpy();
+        });
+
+        // Scroll Spy
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Image Upload Handler
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'profile-image';
+                    img.style.width = '120px';
+                    img.style.height = '120px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '8px';
+
+                    const container = document.getElementById('profileImage');
+                    container.innerHTML = '';
+                    container.appendChild(img);
+
+                    localStorage.setItem('profileImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load saved profile image
+        const savedImage = localStorage.getItem('profileImage');
+        if (savedImage) {
+            const img = document.createElement('img');
+            img.src = savedImage;
+            img.className = 'profile-image';
+            img.style.width = '120px';
+            img.style.height = '120px';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '8px';
+
+            const container = document.getElementById('profileImage');
+            container.innerHTML = '';
+            container.appendChild(img);
+        }
+
+        // Fetch LeetCode Stats
+        async function fetchLeetCodeStats() {
+            try {
+                const response = await fetch('https://leetcode-stats-api.herokuapp.com/KulkSanjana');
+                const data = await response.json();
+
+                const totalSolved = data.totalSolved || 0;
+                document.getElementById('leetcodeCount').textContent = totalSolved;
+            } catch (error) {
+                console.error('Error fetching LeetCode stats:', error);
+                document.getElementById('leetcodeCount').textContent = '---';
+            }
+        }
+
+        // Update GitHub Contribution Graph
+        function updateGitHubGraph() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const graphContainer = document.getElementById('githubGraph');
+            const username = 'Sanjana765Kulkarni';
+
+            // Show loading state
+            graphContainer.innerHTML = '<span class="loading"></span>';
+
+            // Multiple sources for contribution calendar (green squares)
+            const sources = [
+                // Primary: ghchart - Classic GitHub contribution calendar
+                `https://ghchart.rshah.org/${theme === 'dark' ? 'dark' : 'default'}/${username}`,
+                // Fallback 1: Activity Graph - Shows contribution graph
+                `https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=${theme === 'dark' ? 'github-dark' : 'github-light'}&hide_border=true&area=true`,
+                // Fallback 2: Streak Stats - Shows contribution streak
+                `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=${theme === 'dark' ? 'dark' : 'default'}&hide_border=true`
+            ];
+
+            let currentIndex = 0;
+
+            function tryNextSource() {
+                if (currentIndex >= sources.length) {
+                    graphContainer.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 20px;">Unable to load GitHub contributions</p>';
+                    return;
+                }
+
+                const img = new Image();
+                img.src = sources[currentIndex];
+                img.alt = 'GitHub Contributions';
+                img.style.width = '100%';
+                img.style.borderRadius = '6px';
+
+                img.onload = function () {
+                    graphContainer.innerHTML = '';
+                    graphContainer.appendChild(img);
+                };
+
+                img.onerror = function () {
+                    currentIndex++;
+                    tryNextSource();
+                };
+            }
+
+            tryNextSource();
+        }
+
+        // Fetch GitHub Projects
+        async function fetchGitHubProjects() {
+            try {
+                const response = await fetch('https://api.github.com/users/Sanjana765Kulkarni/repos?sort=updated&per_page=6');
+                const repos = await response.json();
+
+                // Pass data to AI engine
+                aiEngine.setProjectsData(repos);
+
+                const projectsContainer = document.getElementById('projectsContainer');
+                projectsContainer.innerHTML = '';
+
+                repos.forEach(repo => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card';
+
+                    projectCard.innerHTML = `
+                        <div class="project-header">
+                            <div class="project-title">${repo.name}</div>
+                            <a href="${repo.html_url}" target="_blank" class="project-link">
+                                View →
+                            </a>
+                        </div>
+                        <div class="project-description">
+                            ${repo.description || 'No description available'}
+                        </div>
+                        <div class="project-meta">
+                            ${repo.language ? `<span>🔹 ${repo.language}</span>` : ''}
+                            <span>⭐ ${repo.stargazers_count}</span>
+                            <span>🔄 ${repo.forks_count}</span>
+                        </div>
+                    `;
+
+                    projectsContainer.appendChild(projectCard);
+                });
+            } catch (error) {
+                console.error('Error fetching GitHub projects:', error);
+                document.getElementById('projectsContainer').innerHTML = '<p style="color: var(--text-secondary);">Unable to load projects</p>';
+            }
+        }
+
+        function showSettings() {
+            alert('Settings panel coming soon!');
+        }
+    </script>
+</body>
+
+</html>
